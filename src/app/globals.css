@@ -1,26 +1,256 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #f5f5f5;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Orbitron", Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #f5f5f5;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image: none;
+  min-height: 100vh;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Orbitron", Arial, Helvetica, sans-serif;
 }
+
+/* Advanced button effects */
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmerSweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.btn-advanced {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.75rem; /* px-7 py-3.5 */
+  border-radius: 9999px; /* full */
+  font-weight: 600;
+  overflow: hidden;
+  transition: transform 300ms ease, box-shadow 300ms ease, letter-spacing 300ms ease;
+  will-change: transform, box-shadow;
+}
+
+.btn-advanced:hover {
+  transform: translateY(-2px);
+  letter-spacing: 0.02em;
+}
+
+.btn-advanced:active {
+  transform: translateY(0) scale(1.0);
+}
+
+/* Animated glow ring using a rotating conic gradient */
+.btn-advanced::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, rgba(255,255,255,0.15), rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 60%, rgba(255,255,255,0) 90%);
+  filter: blur(10px);
+  z-index: 0;
+  opacity: 0;
+  animation: spinSlow 4s linear infinite;
+  transition: opacity 300ms ease;
+}
+
+.btn-advanced:hover::before {
+  opacity: 1;
+}
+
+/* Inner reflective sweep */
+.btn-advanced::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+.btn-advanced:hover::after {
+  animation: shimmerSweep 900ms ease;
+}
+
+.btn-advanced > span {
+  position: relative;
+  z-index: 2;
+}
+
+.btn--orange {
+  background: #ea580c; /* tailwind orange-600 */
+  color: #0a0a0a;
+  box-shadow: none;
+}
+
+.btn--orange:hover {
+  box-shadow: none;
+}
+
+/* Disable glow ring for orange button specifically */
+.btn--orange::before {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+.btn--dark {
+  background: #000000;
+  color: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.btn--dark:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* removed arrows ticker styles */
+
+/* Animated orbs and glass utilities */
+@keyframes floatY {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.orb {
+  position: absolute;
+  filter: blur(24px);
+  border-radius: 9999px;
+  opacity: 0.45;
+  animation: floatY 10s ease-in-out infinite;
+  background-size: 200% 200%;
+  animation-name: floatY, gradientShift;
+  animation-duration: 10s, 14s;
+  animation-timing-function: ease-in-out, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+.orb--pink {
+  background-image: radial-gradient(circle at 30% 30%, rgba(236,72,153,0.7), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(59,130,246,0.6), transparent 60%);
+}
+
+.orb--orange {
+  background-image: radial-gradient(circle at 30% 30%, rgba(234,88,12,0.7), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(16,185,129,0.6), transparent 60%);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+.card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.25);
+  box-shadow: 0 14px 50px rgba(0,0,0,0.35);
+}
+
+.badge {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 9999px;
+  padding: 4px 10px;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+/* Subtle top-only fading dots */
+@keyframes fadeDots {
+  0% { opacity: 0.12; }
+  50% { opacity: 0.35; }
+  100% { opacity: 0.12; }
+}
+
+.dots-top::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 40vh;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.7) 0.5px, transparent 1.2px),
+    radial-gradient(circle, rgba(255,255,255,0.35) 0.5px, transparent 1.2px);
+  background-size: 18px 18px, 18px 18px;
+  background-position: 0 0, 9px 9px;
+  animation: fadeDots 2s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* Monochrome overlays */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+.grid-overlay::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px;
+  z-index: 0;
+}
+
+/* Reveal animations */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  animation: revealUp 700ms ease forwards;
+}
+
+.reveal-delay-1 { animation-delay: 0.1s; }
+.reveal-delay-2 { animation-delay: 0.2s; }
+.reveal-delay-3 { animation-delay: 0.3s; }
+.reveal-delay-4 { animation-delay: 0.4s; }
+.reveal-delay-5 { animation-delay: 0.5s; }
