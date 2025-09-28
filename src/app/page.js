@@ -3,24 +3,27 @@
 import { FiArrowUpRight, FiPlay, FiGlobe, FiSmartphone } from 'react-icons/fi';
 import { FaApple, FaAndroid } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import PricingSection from './components/PricingSection';
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/Images/Wallpaper.mp4" type="video/mp4" />
-        </video>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/40"></div>
-      </div>
+    <div className="w-full relative">
+      {/* Hero Section */}
+      <div className="relative min-h-screen w-full overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/Images/Wallpaper.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
       {/* Navbar */}
       <motion.nav 
         initial={{ opacity: 0, y: -50 }}
@@ -83,7 +86,7 @@ export default function Home() {
               </motion.a>
               
               <motion.a 
-                href="#" 
+                href="#pricing" 
                 className="text-white px-2 py-2 rounded-lg text-xs md:text-sm font-medium relative overflow-hidden group lg:px-4"
                 whileHover={{ 
                   scale: 1.08,
@@ -918,14 +921,18 @@ export default function Home() {
         <div className="w-full h-full bg-gradient-to-t from-white/20 via-white/5 to-transparent"></div>
       </div>
       
-      {/* Custom CSS for smooth fade animation */}
-      <style jsx>{`
-        @keyframes smoothFade {
-          0% { opacity: 0.2; }
-          50% { opacity: 1; }
-          100% { opacity: 0.2; }
-        }
-      `}</style>
+        {/* Custom CSS for smooth fade animation */}
+        <style jsx>{`
+          @keyframes smoothFade {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+          }
+        `}</style>
+      </div>
+      
+      {/* Pricing Section */}
+      <PricingSection />
     </div>
   );
 }
