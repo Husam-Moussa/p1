@@ -13,13 +13,12 @@ export default function PricingSection() {
       name: "Starter",
       tagColor: "bg-purple-500",
       description: "Perfect for everyday explorers",
-      monthlyPrice: 0,
+      monthlyPrice: 49,
       annualPrice: 0,
       features: [
-        "Multichain dashboard",
-        "Basic swaps & transfers", 
-        "Token & NFT auto-detection",
-        "Dark UI by default"
+        "Up to 100 active members",
+        "Basic dashboard (member check-in, payments, attendance)", 
+        "Email support",
       ],
       buttonText: "Start for Free",
       buttonStyle: "bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white"
@@ -28,30 +27,28 @@ export default function PricingSection() {
       name: "Pro",
       tagColor: "bg-green-500",
       description: "Built for DeFi users, NFT collectors, and active traders",
-      monthlyPrice: 9,
+      monthlyPrice: 99,
       annualPrice: 90,
       isPopular: true,
       features: [
-        "Unlimited swaps",
-        "Real-time gas optimizer",
-        "Portfolio analytics & performance tracking",
-        "Passkey login + advanced recovery",
-        "Priority in-app support"
+        "Up to 500 active members",
+        "Automated billing & reminders",
+        "Custom branding (their logo/colors)",
+        "Priority support",
       ],
       buttonText: "Start for Free",
       buttonStyle: "bg-lime-300 hover:bg-[#A3E635]/80 text-black"
     },
     {
-      name: "Team",
+      name: "Enterprise",
       tagColor: "bg-blue-400/70",
       description: "For DAOs, dev teams, and institutional users",
-      monthlyPrice: 25,
+      monthlyPrice: 199,
       annualPrice: 250,
       features: [
-        "Shared team vaults",
-        "Role-based permissions & access control",
-        "API access for automation",
-        "Bulk transaction mode",
+        "Unlimited members",
+        "Advanced analytics & reports",
+        "API & integrations (CRM, marketing tools)",
         "Dedicated account manager"
       ],
       buttonText: "Contact Sales",
